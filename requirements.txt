@@ -1,0 +1,3 @@
+# riskkit itself needs only the Python standard library (3.9+)
+matplotlib>=3.7   # scripts/make_figures.py
+pytest>=7         # optional, for the tests

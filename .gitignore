@@ -1,0 +1,20 @@
+# secrets: never commit
+*key*.txt
+*token*
+*secret*
+*config*.json
+.env
+
+# data & databases
+*.db
+*.db-wal
+*.db-shm
+*.zip
+backtest_data/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/

@@ -1,0 +1,8 @@
+name,bets,hit_pct,avg_win_R,expectancy_R,total_pct_at_2pct_risk,maxdd_pct,worst_losing_streak,y2021,y2022,y2023,y2024,y2025,y2026
+Vol-compression strangle 1D,1116,18.0,2.23,-0.39,-100.0,-100.0,39,-68.0,-89.2,-84.9,-55.3,-80.3,-79.5
+Vol-compression strangle 3D,441,25.0,2.37,-0.14,-77.0,-87.0,24,-21.7,-55.1,-28.0,3.2,-6.8,-4.1
+Vol-compression strangle 7D,222,32.0,2.2,0.06,15.0,-49.0,13,-1.3,-33.5,12.7,24.1,21.7,3.2
+Vol-compression strangle 14D,118,37.0,2.14,0.21,54.0,-29.0,8,2.6,-21.6,19.1,31.5,0.8,21.5
+Delta-hedged long gamma,226,10.0,0.14,-0.24,-66.0,-66.0,49,-7.2,-23.4,-22.1,-9.5,-16.5,-19.3
+Liquidation wick reversion,2115,47.0,0.87,-0.1,-99.0,-99.0,18,-24.1,-65.1,-74.2,-31.9,-60.8,-54.3
+Volatility-compression breakout,3125,32.0,1.94,-0.05,-99.0,-100.0,27,-26.0,-70.2,-64.3,-77.5,-76.0,102.0

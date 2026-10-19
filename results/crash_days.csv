@@ -1,0 +1,14 @@
+name,avg_return_pct_on_worst_10pct_btc_days,corr_on_those_days
+Short gamma daily,-0.29,0.21
+Short gamma weekly,-0.14,0.13
+BTC covered call,-3.62,0.78
+BTC collar,-2.61,0.29
+Vol-compression strangle 14D,0.39,-0.19
+Trend 10 (CTA),0.28,-0.23
+Trend 10 v2,0.2,-0.05
+30-day breakout v2,-1.95,0.15
+Low volatility,-1.74,0.54
+ETH/BTC relative trend,0.06,0.03
+Alt vs BTC reversion,-0.0,-0.18
+BTC spot grid,-2.43,0.72
+BTC,-5.23,
