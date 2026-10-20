@@ -294,6 +294,36 @@ def fig_rotation():
     save(fig, "rotation.png", "Weekly: hold the best 28-day performer if positive, else cash. Removing SOL cuts the result from 44× to 4.3×.")
 
 
+def fig_selection():
+    rows = rd("selection.csv")
+    order = ["Top 4 by Sharpe", "All with Sharpe ≥ 0.5 (10)", "Top 4 by return", "4 most independent (Sharpe ≥ 0.5)", "BTC buy & hold"]
+    R = {r["method"]: r for r in rows}
+    fig, ax = plt.subplots(figsize=(9.5, 4.8))
+    for i, k in enumerate(order):
+        r = R[k]
+        a, b = num(r["sharpe_2021_23"]), num(r["sharpe_2024_26"])
+        bench = k.startswith("BTC")
+        ax.plot([a, b], [i, i], color=GRID, lw=3, zorder=1, solid_capstyle="round")
+        ax.scatter([a], [i], s=70, color=BENCH, edgecolor=SURFACE, linewidth=1.5, zorder=3, label="2021–2023 (used to choose)" if i == 0 else None)
+        ax.scatter([b], [i], s=85, color=BENCH if bench else BLUE, edgecolor=SURFACE, linewidth=1.5, zorder=4,
+                   label="2024–2026 (never seen)" if i == 0 else None)
+        ax.annotate(f"{b:.2f}   ·   {num(r['cagr_2024_26_pct']):+.0f}%/yr, max DD {num(r['maxdd_2024_26_pct']):.0f}%", (b, i),
+                    xytext=(-10, 0) if b < a else (10, 0), textcoords="offset points", va="center",
+                    ha="right" if b < a else "left", fontsize=8.5, color=INK2)
+        ax.annotate(f"{a:.2f}", (a, i), xytext=(9, 0) if b < a else (-9, 0), textcoords="offset points", va="center",
+                    ha="left" if b < a else "right", fontsize=8.5, color=MUTED)
+    ax.set_yticks(range(len(order)))
+    ax.set_yticklabels(order, fontsize=9)
+    ax.invert_yaxis()
+    ax.set_xlim(-1.6, 4.4)
+    ax.axvline(0, color=AXIS, lw=1)
+    ax.grid(axis="y", visible=False)
+    ax.set_xlabel("Sharpe ratio of an equal-risk portfolio of the chosen strategies")
+    ax.set_title("Choose with 2021–2023, then measure on 2024–2026")
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.16), ncol=2, fontsize=9)
+    save(fig, "selection.png", "Every method decays out of sample. Choosing for stability (Sharpe) keeps the best risk-adjusted result; choosing for low correlation alone keeps the least.", y=-0.15)
+
+
 def main():
     os.makedirs(FIG, exist_ok=True)
     fig_portfolio()
@@ -304,6 +334,7 @@ def main():
     fig_corr()
     fig_crash()
     fig_rotation()
+    fig_selection()
 
 
 if __name__ == "__main__":

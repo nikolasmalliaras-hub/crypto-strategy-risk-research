@@ -1,0 +1,6 @@
+method,cagr_2021_23_pct,maxdd_2021_23_pct,sharpe_2021_23,cagr_2024_26_pct,maxdd_2024_26_pct,sharpe_2024_26,y2024,y2025,y2026,chosen,avg_abs_corr_2021_23
+Top 4 by return,100.0,-22.0,2.99,9.0,-15.0,0.82,18.4,6.2,2.3,BTC/ETH/SOL rotation; Short gamma daily; 30-day breakout v2; Low volatility,0.15
+Top 4 by Sharpe,59.0,-8.0,3.77,9.0,-5.0,1.77,14.9,2.8,7.4,Short gamma daily; Short gamma weekly; BTC/ETH/SOL rotation; Trend 10,0.13
+4 most independent (Sharpe ≥ 0.5),38.0,-9.0,2.79,2.0,-10.0,0.29,-4.5,6.0,3.9,Short gamma daily; ETH/BTC relative trend; Funding carry; 30-day breakout v2,0.04
+All with Sharpe ≥ 0.5 (10),41.0,-6.0,2.95,6.0,-5.0,1.17,7.3,6.5,4.1,Funding carry; ETH/BTC relative trend; Low volatility; Trend 10; 30-day breakout v2; BTC/ETH/SOL rotation; Trend 10 v2; BTC covered call; Short gamma daily; Short gamma weekly,0.14
+BTC buy & hold,13.0,-77.0,0.51,27.0,-53.0,0.74,121.1,-6.4,-6.3,,

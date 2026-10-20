@@ -25,6 +25,7 @@ The headline is not the return: it is that a similar return was reached with **o
 4. Do strategies built on different ideas really diversify each other?
 5. Is equal *risk* better than equal *capital* when combining them?
 6. How much of an impressive backtest is hindsight?
+7. If strategies had been chosen without knowing the future, which way of choosing would have held up?
 
 ## Approach
 
@@ -66,7 +67,7 @@ The same ideas were re-run with one pre-registered change each: fewer and strong
 
 - **Selling** delta-hedged straddles with protective wings returned +19%/yr (weekly, max drawdown −7%) and +41%/yr (daily, −12%). The exact mirror strategies that **buy** the same straddles lost heavily: implied volatility tends to exceed the volatility that follows.
 - **Buying** options is costly unless it is cheap *and* has time. Buying strangles when implied vol was historically low was negative at 1–3 days and positive at 14 days (**+0.21R per bet**, positive in 5 of 6 years, +21.5% in 2026).
-- **Covered calls** beat holding Bitcoin with a smaller drawdown (+24%/yr, −53% vs. +19%, −77%). **Collars** cut the drawdown to −49%. **Protective puts** on a grid cost more than they saved.
+- **Covered calls** beat holding Bitcoin with a smaller drawdown (+23%/yr, −53% vs. +19%, −77%). **Collars** cut the drawdown to −49%. **Protective puts** on a grid cost more than they saved.
 
 ### 4. Diversification is real only if strategies do different jobs on bad days
 
@@ -98,10 +99,30 @@ Every calendar year was positive, including 2022, when Bitcoin fell 64%.
 
 A weekly "hold the strongest of BTC / ETH / SOL" rotation returned **+4,300%**. Most of it came from SOL's 2021 rise from about $1.5 to $250. And SOL was in the list only because, in 2026, it is known to have survived and succeeded.
 
-- Without SOL, the rotation returned +325%.
-- With BTC only, it returned +62%.
+- Without SOL, the rotation returned +324%.
+- With BTC only, it returned +61%.
 
 The same bias applies, more quietly, to every universe of coins chosen today.
+
+### 7. Choosing strategies without the future: stability holds up, past return does not
+
+![Selection test](docs/figures/selection.png)
+
+Selection bias can be measured directly. Four common ways of choosing strategies were applied using **2021–2023 data only**. Each choice was then combined with equal risk and measured on **2024–2026**, years the choice had never seen.
+
+| How strategies were chosen (2021–2023) | Sharpe, 2021–23 | Sharpe, 2024–26 | Return, 2024–26 | Max DD, 2024–26 |
+|---|---:|---:|---:|---:|
+| **Top 4 by Sharpe** | 3.77 | **1.77** | +9%/yr | −5% |
+| All with Sharpe ≥ 0.5 (10 strategies) | 2.95 | 1.17 | +6%/yr | −5% |
+| Top 4 by return | 2.99 | 0.82 | +9%/yr | −15% |
+| 4 least correlated (Sharpe ≥ 0.5) | 2.79 | 0.29 | +2%/yr | −10% |
+| BTC buy & hold | 0.51 | 0.74 | +27%/yr | −53% |
+
+- **Every method decayed.** In-sample Sharpe ratios of about 3 fell to between 0.3 and 1.8. This is the size of the haircut to expect from any backtest-based selection.
+- **Choosing for stability held up best.** The same return as choosing for past return, with a third of the drawdown.
+- **Choosing for past return picked the luck of the period:** SOL's 2021 rally and the 2021/2023 breakout years.
+- **Low correlation alone is not enough.** The least correlated set (average |ρ| 0.04) had the weakest result: diversifying strategies that have little to harvest only averages small returns.
+- **Even this test is optimistic.** The list of candidates was itself written in 2026, and it still contains hindsight (SOL in the rotation).
 
 ### Every strategy in one view
 
@@ -117,6 +138,8 @@ The +21%/yr above should not be taken at face value:
 2. **Selection bias.** The surviving strategies were chosen after seeing the full period. A 30–50% haircut is a common rule of thumb.
 3. **Model risk in options.** There is no free history of option prices, so they are reconstructed from Deribit's volatility index: no smile, one implied volatility for every expiry, hourly hedging. Options supply more than half of the portfolio's return.
 4. **Live drawdowns are usually 1.5–2× the backtest's.**
+
+The selection test above points the same way: chosen out of sample, the best method returned about 9%/yr.
 
 | Scenario | Annual return | Worst drawdown |
 |---|---:|---:|

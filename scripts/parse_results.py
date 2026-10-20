@@ -98,9 +98,8 @@ def split(lines, start, stops):
 
 
 def main():
-    v2, an = read("backtest_v2_run.txt"), read("analysis.txt")
-    # a full run (all parts) has the v1 table too; the published results come from two runs
-    v1 = read("backtest_v1_run.txt") if os.path.exists(os.path.join(RES, "backtest_v1_run.txt")) else v2
+    v2, an = read("backtest_run.txt"), read("analysis.txt")
+    v1 = v2                                             # one full run holds both the v1 and the v2 tables
     rows = []
     rows += table_rows(split(v1, "STRATEGIES (", ["GRID", "CONVEX", "HEDGED"]), "strategies", "v1")
     v2s = split(v2, "STRATEGIES v2", ["Μόνο live", "GRID"])
@@ -157,6 +156,24 @@ def main():
     ro = table_rows(split(an, "4. ROTATION", ["Οι δύο"]), "rotation", "")
     write("rotation.csv", ["name", "total_pct", "cagr_pct", "maxdd_pct", "sharpe"] + [f"y{y}" for y in YEARS],
           [[r["name"], r["total"], r["cagr"], r["maxdd"], r["sharpe"]] + r["years"] for r in ro])
+    # selection test: choose with 2021-2023 only, measure on 2024-2026
+    METHOD = {"Οι 4 πιο κερδοφόρες (CAGR)": "Top 4 by return", "Οι 4 με το καλύτερο Sharpe": "Top 4 by Sharpe",
+              "Οι 4 πιο ανεξάρτητες (Sharpe ≥ 0.5)": "4 most independent (Sharpe ≥ 0.5)",
+              "Όλες με Sharpe ≥ 0.5 (10)": "All with Sharpe ≥ 0.5 (10)", "BTC (απλό κράτημα)": "BTC buy & hold"}
+    STRAT = {"Rotation B/E/S": "BTC/ETH/SOL rotation", "Short gamma D": "Short gamma daily", "Short gamma W": "Short gamma weekly",
+             "30d breakout v2": "30-day breakout v2", "ETH/BTC trend": "ETH/BTC relative trend", "Covered call": "BTC covered call"}
+    sel, cur = [], None
+    for ln in split(an, "5. ΕΠΙΛΟΓΗ", ["Πώς διαβάζεται"]):
+        m = re.match(r"^(.+?)\s+" + r"\s+".join([PCT, PCT, r"(-?\d+\.\d+)"] * 2) + r"\s+" + r"\s+".join([PCT] * 3) + r"\s*$", ln)
+        if m:
+            cur = [METHOD.get(m.group(1).strip(), m.group(1).strip())] + [float(m.group(k)) for k in range(2, 11)] + ["", ""]
+            sel.append(cur)
+        elif cur and ln.strip().startswith("→"):
+            cur[10] = "; ".join(STRAT.get(x.strip(), x.strip()) for x in ln.strip()[1:].split(","))
+        elif cur and "correlation" in ln:
+            cur[11] = float(re.findall(r"(\d+\.\d+)\s*$", ln)[0])
+    write("selection.csv", ["method", "cagr_2021_23_pct", "maxdd_2021_23_pct", "sharpe_2021_23", "cagr_2024_26_pct", "maxdd_2024_26_pct",
+                            "sharpe_2024_26", "y2024", "y2025", "y2026", "chosen", "avg_abs_corr_2021_23"], sel)
 
 
 if __name__ == "__main__":

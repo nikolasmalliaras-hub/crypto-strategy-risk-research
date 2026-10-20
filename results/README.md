@@ -9,8 +9,9 @@
 | `crash_days.csv` | Average return and correlation on BTC's worst 10% of days |
 | `portfolio.csv` | Combined portfolios: equal capital vs. equal risk, with/without breakout, without options |
 | `rotation.csv` | Selection-bias check for the BTC/ETH/SOL rotation |
-| `backtest_v1_run.txt`, `backtest_v2_run.txt`, `analysis.txt` | Raw program output the CSVs were parsed from (original Greek labels) |
+| `selection.csv` | Selection test: four ways of choosing strategies on 2021–2023, measured on 2024–2026 |
+| `backtest_run.txt`, `analysis.txt` | Raw program output the CSVs were parsed from (original Greek labels) |
 
-Period: 2 January 2021 to 19 October 2026. The first raw run ends on 17 October; strategies that appear in both runs give identical results.
+Period: 2 January 2021 to 19 October 2026, one full run. Position-sizing experiments (leverage levels) are not part of the published output.
 
 Column meanings in the raw files: *Σύνολο* = total return, *Ετήσια* = CAGR, *Max DD* = worst drawdown, then one column per calendar year; *κλεισ.* = closed trades, *κύκλοι* = cycles, *stop* = grid restarts.

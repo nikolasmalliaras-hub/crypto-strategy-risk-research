@@ -58,8 +58,8 @@ The revisions were decided before testing, one per strategy. They share one them
 | Short gamma, daily | Sell at-the-money straddles with protective wings, delta-hedged | +41% | −12% | 3.72 | Strongest result; depends most on the options model |
 | Short gamma, weekly | Same, weekly expiry | +19% | −7% | 3.42 | Steady in every year |
 | Long gamma, daily / weekly | The exact mirror (control group) | −76% / −34% | −100% / −91% | −14.16 / −9.10 | Confirms the premium |
-| BTC covered call | Hold BTC, sell an out-of-the-money call every week | +24% | −53% | 0.69 | Beats holding (+19%, −77%) |
-| BTC collar | Hold BTC, sell a call, buy a put | +16% | −49% | 0.57 | Lower return, much lower drawdown |
+| BTC covered call | Hold BTC, sell an out-of-the-money call every week | +23% | −53% | 0.69 | Beats holding (+19%, −77%) |
+| BTC collar | Hold BTC, sell a call, buy a put | +16% | −49% | 0.56 | Lower return, much lower drawdown |
 | Protected grid (v1 / v2) | Spot grid plus a monthly protective put (v2: only when vol is cheap) | −7% / −1% | −84% / −71% | 0.02 / 0.08 | The put costs more than it saves (same grid without the put: 0%, −68%) |
 | Vol spread BTC/ETH | Sell the relatively expensive volatility, buy the cheap one | −6% | −32% | −3.80 | No premium |
 
